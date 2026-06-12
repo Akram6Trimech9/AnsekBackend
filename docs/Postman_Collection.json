@@ -1,0 +1,299 @@
+{
+  "info": {
+    "_postman_id": "news-podcast-api",
+    "name": "Ansek API",
+    "description": "poadcast Ansek Backend API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" },
+              { "key": "Content-Type", "value": "multipart/form-data" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "Technology", "type": "text" },
+                { "key": "description", "value": "Tech news and updates", "type": "text" }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "News Articles",
+      "item": [
+        {
+          "name": "Get All Articles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/news?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "news"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Trending Articles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/news/trending",
+              "host": ["{{base_url}}"],
+              "path": ["api", "news", "trending"]
+            }
+          }
+        },
+        {
+          "name": "Get Featured Articles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/news/featured",
+              "host": ["{{base_url}}"],
+              "path": ["api", "news", "featured"]
+            }
+          }
+        },
+        {
+          "name": "Get Article by Slug",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/news/my-article-title",
+              "host": ["{{base_url}}"],
+              "path": ["api", "news", "my-article-title"]
+            }
+          }
+        },
+        {
+          "name": "Create Article",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "title", "value": "Amazing Tech News", "type": "text" },
+                { "key": "shortDescription", "value": "A brief overview", "type": "text" },
+                { "key": "content", "value": "Full article content here", "type": "text" },
+                { "key": "category", "value": "CATEGORY_ID", "type": "text" },
+                { "key": "status", "value": "published", "type": "text" },
+                { "key": "featuredImage", "type": "file" }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/news",
+              "host": ["{{base_url}}"],
+              "path": ["api", "news"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Episodes",
+      "item": [
+        {
+          "name": "Get All Episodes",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/episodes?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "episodes"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Featured Episodes",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/episodes/featured",
+              "host": ["{{base_url}}"],
+              "path": ["api", "episodes", "featured"]
+            }
+          }
+        },
+        {
+          "name": "Get Latest Episodes",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/episodes/latest",
+              "host": ["{{base_url}}"],
+              "path": ["api", "episodes", "latest"]
+            }
+          }
+        },
+        {
+          "name": "Create Episode",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "title", "value": "Episode 1", "type": "text" },
+                { "key": "description", "value": "Description", "type": "text" },
+                { "key": "audioFile", "type": "file" },
+                { "key": "thumbnail", "type": "file" }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/episodes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "episodes"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "item": [
+        {
+          "name": "Submit Contact Form",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Jane Smith\",\n  \"email\": \"jane@example.com\",\n  \"phone\": \"+1234567890\",\n  \"subject\": \"Inquiry\",\n  \"message\": \"I have a question...\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/contact",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact"]
+            }
+          }
+        },
+        {
+          "name": "Get All Messages (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/contact?page=1&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
